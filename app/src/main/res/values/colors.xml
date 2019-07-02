@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="white">#ffff</color>
+
+    <color name="row_keyword_color_1">#246c00</color>
+    <color name="row_keyword_color_2">#006c55</color>
+    <color name="row_keyword_color_3">#906c00</color>
+    <color name="row_keyword_color_4">#904800</color>
+    <color name="row_keyword_color_5">#902455</color>
+    <color name="row_keyword_color_6">#902400</color>
+    <color name="row_keyword_color_7">#249000</color>
+    <color name="row_keyword_color_8">#004800</color>
+</resources>
