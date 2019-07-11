@@ -1,8 +1,8 @@
-package com.thachpham.hometest
+package com.kiemtien.hotlist
 
 import android.app.Application
-import com.thachpham.hometest.net.ApiClient
-import com.thachpham.hometest.net.ApiInterface
+import com.kiemtien.hotlist.net.ApiClient
+import com.kiemtien.hotlist.net.ApiInterface
 
 class MyApplication : Application() {
 

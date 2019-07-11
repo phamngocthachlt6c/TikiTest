@@ -1,4 +1,4 @@
-package com.thachpham.hometest.util;
+package com.kiemtien.hotlist.util;
 
 public class StringUtils {
     public static String getKeywordOptimized(String keyword) {

@@ -1,4 +1,4 @@
-package com.thachpham.hometest.net;
+package com.kiemtien.hotlist.net;
 
 import android.content.Context;
 import com.google.gson.Gson;
@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
-import com.thachpham.hometest.common.Constant;
+import com.kiemtien.hotlist.common.Constant;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

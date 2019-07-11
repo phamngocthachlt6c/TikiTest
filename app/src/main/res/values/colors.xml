@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="white">#ffff</color>
+    <color name="black">#000</color>
+    <color name="row_category_text_update_at">#f85252</color>
+    <color name="row_category_divided_line">#efefee</color>
 
     <color name="row_keyword_color_1">#246c00</color>
     <color name="row_keyword_color_2">#006c55</color>

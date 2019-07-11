@@ -1,4 +1,4 @@
-package com.thachpham.hometest.adapter
+package com.kiemtien.hotlist.adapter
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView

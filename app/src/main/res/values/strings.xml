@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">HomeTest</string>
-    <string name="keyword_title">Từ khóa hot</string>
-    <string name="keyword_empty">Danh sách rỗng</string>
-    <string name="netword_error">Lỗi mạng</string>
+    <string name="app_name">Hot List</string>
+    <string name="keyword_empty">Empty list!</string>
+    <string name="netword_error">Network error!</string>
 </resources>

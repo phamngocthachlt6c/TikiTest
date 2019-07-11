@@ -1,4 +1,4 @@
-package com.thachpham.hometest.adapter
+package com.kiemtien.hotlist.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.row_keyword.view.*
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.support.v7.widget.LinearLayoutManager
-import com.thachpham.hometest.util.StringUtils
+import com.kiemtien.hotlist.util.StringUtils
 
 
 class KeywordListAdapter(var keywordColors: IntArray, var layoutManager: LinearLayoutManager) :
@@ -17,7 +17,7 @@ class KeywordListAdapter(var keywordColors: IntArray, var layoutManager: LinearL
     private val MIDDLE_INDEX = Integer.MAX_VALUE / 2
     private var keywords: MutableList<String> = ArrayList()
     private var indexColors = 0
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): KeywordListAdapter.KeywordVH {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): KeywordVH {
         return KeywordVH(LayoutInflater.from(viewGroup.context).inflate(R.layout.row_keyword, viewGroup, false))
     }
 
@@ -25,7 +25,7 @@ class KeywordListAdapter(var keywordColors: IntArray, var layoutManager: LinearL
         return if (keywords.size == 0) 0 else Integer.MAX_VALUE
     }
 
-    override fun onBindViewHolder(viewHolder: KeywordListAdapter.KeywordVH, position: Int) {
+    override fun onBindViewHolder(viewHolder: KeywordVH, position: Int) {
         viewHolder.bindView(keywords[getIndexOnList(position)])
     }
 

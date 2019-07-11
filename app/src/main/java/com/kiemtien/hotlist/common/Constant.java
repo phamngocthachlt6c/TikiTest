@@ -1,4 +1,4 @@
-package com.thachpham.hometest.common;
+package com.kiemtien.hotlist.common;
 
 public class Constant {
     public static final String DOMAIN = "https://raw.githubusercontent.com";
