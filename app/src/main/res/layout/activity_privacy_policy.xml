@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.kiemtien.hotlist.activity.MainActivity">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        <LinearLayout
+                android:padding="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent" android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_marginBottom="20dp"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:text="Privacy Policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textSize="17sp"
+                    android:text="@string/privacy_content1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_marginLeft="40dp"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp"
+                    android:id="@+id/tvGooglePlayService"
+                    android:text="@string/text_google_play_services"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_marginLeft="40dp"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp"
+                    android:id="@+id/tvGoogleAdMob"
+                    android:text="@string/text_google_admob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_marginLeft="40dp"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp"
+                    android:id="@+id/tvFacebook"
+                    android:text="@string/text_facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textSize="17sp"
+                    android:text="@string/privacy_content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

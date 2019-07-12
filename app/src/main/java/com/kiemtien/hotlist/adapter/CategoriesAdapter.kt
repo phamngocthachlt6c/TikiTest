@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.thachpham.hometest.R
+import com.kiemtien.hotlist.R
 import android.support.v7.widget.LinearLayoutManager
 import com.kiemtien.hotlist.activity.PicturesActivity
 import com.squareup.picasso.Picasso
@@ -47,7 +47,8 @@ class CategoriesAdapter(var layoutManager: LinearLayoutManager) :
             itemView.tvUpdateAt.text = String.format("%s%s", "Updated on ", category.updateAt)
 
             itemView.setOnClickListener {
-                var nextScreen = Intent(itemView.context, PicturesActivity::class.java)
+                val nextScreen = Intent(itemView.context, PicturesActivity::class.java)
+                nextScreen.putExtra("category", categories[adapterPosition])
                 itemView.context.startActivity(nextScreen)
             }
         }

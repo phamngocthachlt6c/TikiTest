@@ -1,8 +1,10 @@
 package com.kiemtien.hotlist.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
-public class Category {
+public class Category implements Parcelable {
     @SerializedName("id")
     private String id;
     @SerializedName("name")
@@ -11,6 +13,28 @@ public class Category {
     private ImageUrl imageUrl;
     @SerializedName("update_at")
     private String updateAt;
+
+    public Category() {
+
+    }
+
+    protected Category(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        updateAt = in.readString();
+    }
+
+    public static final Creator<Category> CREATOR = new Creator<Category>() {
+        @Override
+        public Category createFromParcel(Parcel in) {
+            return new Category(in);
+        }
+
+        @Override
+        public Category[] newArray(int size) {
+            return new Category[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -42,5 +66,17 @@ public class Category {
 
     public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(name);
+        parcel.writeString(updateAt);
     }
 }

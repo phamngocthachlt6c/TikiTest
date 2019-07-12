@@ -1,21 +1,21 @@
-package com.kiemtien.hotlist.activity
+package com.kiemtien.hotlist.fragment
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.view.MenuItem
+import android.view.LayoutInflater
 import android.view.View
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
+import android.view.ViewGroup
+import com.kiemtien.hotlist.R
 import com.kiemtien.hotlist.adapter.PicturesAdapter
+import com.kiemtien.hotlist.model.Category
 import com.kiemtien.hotlist.model.Picture
 import com.kiemtien.hotlist.presenter.PicturesPresenter
 import com.kiemtien.hotlist.view.PicturesView
-import com.kiemtien.hotlist.R
-import com.kiemtien.hotlist.model.Category
 import kotlinx.android.synthetic.main.activity_pictures.*
+import kotlinx.android.synthetic.main.activity_pictures.view.*
 
-class PicturesActivity : AppCompatActivity(), PicturesView {
+class PicturesFragment : BaseFragment(), PicturesView {
     private val STATUS_LOADING = 0
     private val STATUS_NOT_EMPTY = 1
     private val STATUS_EMPTY = 2
@@ -23,42 +23,27 @@ class PicturesActivity : AppCompatActivity(), PicturesView {
 
     private var picturesPresenter: PicturesPresenter? = null
     private var picturesAdapter: PicturesAdapter? = null
+    private var category: Category? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pictures)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val category: Category? = intent.getParcelableExtra("category")
-        supportActionBar?.title = category?.name
-        refreshViewPictures.setOnRefreshListener {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.activity_pictures, container)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.refreshViewPictures.setOnRefreshListener {
             fetchPictures()
         }
-        val linearLayoutManager = GridLayoutManager(this@PicturesActivity, 2)
+        val linearLayoutManager = GridLayoutManager(context, 2)
         picturesAdapter = PicturesAdapter(linearLayoutManager)
-        with(rvPictures) {
+        with(view.rvPictures) {
             layoutManager = linearLayoutManager
             adapter = picturesAdapter
         }
 
         picturesPresenter = PicturesPresenter(this)
         fetchPictures()
-
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713")
-        val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     private fun fetchPictures() {
@@ -104,6 +89,15 @@ class PicturesActivity : AppCompatActivity(), PicturesView {
                 pgLoadingPictures.visibility = View.GONE
                 tvErrorPictures.visibility = View.VISIBLE
             }
+        }
+    }
+
+    companion object {
+
+        fun newInstance(category: Category): PicturesFragment {
+            val fragment = PicturesFragment()
+            fragment.category = category
+            return fragment
         }
     }
 }

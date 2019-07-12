@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.thachpham.hometest.R
+import com.kiemtien.hotlist.R
 import android.support.v7.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
 import com.kiemtien.hotlist.model.Picture

@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.thachpham.hometest.R
+import com.kiemtien.hotlist.R
 import kotlinx.android.synthetic.main.row_keyword.view.*
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter

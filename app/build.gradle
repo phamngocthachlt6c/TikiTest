@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.thachpham.hometest"
+        applicationId "com.kiemtien.hostlist"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
@@ -46,4 +46,6 @@ dependencies {
 
     implementation "io.reactivex.rxjava2:rxjava:$rxjava2_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxjava2_version"
+
+    implementation 'com.google.android.gms:play-services-ads:16.0.0'
 }
