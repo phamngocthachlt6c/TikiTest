@@ -1,6 +1,9 @@
 package com.kiemtien.hotlist.common;
 
 public class Constant {
-    public static final String DOMAIN = "https://raw.githubusercontent.com";
-    public static final String LINK_KEYWORD = "/tikivn/android-home-test/v2/keywords.json";
+    public static final String DOMAIN = "http://androidorion.com:8080/";
+    public static final String API_GET_CATEGORIES = "/api/get_categories";
+    public static final String API_GET_PICTURES = "/api/get_pictures";
+
+    public static final String API_GET_COMMON_CONFIG = "/api/get_common_config";
 }

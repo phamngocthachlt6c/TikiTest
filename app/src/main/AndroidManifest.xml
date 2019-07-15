@@ -18,7 +18,7 @@
         <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="ca-app-pub-3940256099942544~3347511713">
+                android:value="@string/ads_application_id">
         </meta-data>
 
         <activity android:name="com.kiemtien.hotlist.activity.MainActivity"
@@ -29,11 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.kiemtien.hotlist.activity.PicturesActivity"
-                  android:screenOrientation="portrait">
-        </activity>
         <activity android:name="com.kiemtien.hotlist.activity.PrivacyPolicyActivity"
                   android:screenOrientation="portrait"></activity>
+        <activity android:name="com.kiemtien.hotlist.activity.PictureDetailActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

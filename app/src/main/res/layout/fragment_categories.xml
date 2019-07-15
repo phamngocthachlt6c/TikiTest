@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.kiemtien.hotlist.activity.PicturesActivity">
+        android:orientation="vertical"
+        tools:context="com.kiemtien.hotlist.activity.MainActivity">
 
     <LinearLayout
+            android:background="#eaeaea"
+            android:id="@+id/layoutPrivacyPolicy"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+        <TextView
+                android:text="@string/text_privacy_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:padding="5dp"/>
+    </LinearLayout>
 
-        <android.support.v4.widget.SwipeRefreshLayout
-                android:layout_weight="1"
-                android:id="@+id/refreshViewPictures"
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_weight="1"
+            android:id="@+id/refreshView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_height="match_parent"
+                android:orientation="vertical">
             <FrameLayout
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="0dp">
                 <LinearLayout
-                        android:id="@+id/layoutContentPictures"
+                        android:id="@+id/layoutContent"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/white"
@@ -30,14 +45,14 @@
 
                     <android.support.v7.widget.RecyclerView
                             android:layout_gravity="center_vertical"
-                            android:id="@+id/rvPictures"
+                            android:id="@+id/rvCategories"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
 
                     <TextView
                             android:visibility="gone"
                             android:gravity="center"
-                            android:id="@+id/tvEmptyPictures"
+                            android:id="@+id/tvEmpty"
                             android:text="@string/keyword_empty"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
@@ -46,29 +61,19 @@
                 <ProgressBar
                         android:visibility="gone"
                         android:layout_gravity="center"
-                        android:id="@+id/pgLoadingPictures"
+                        android:id="@+id/pgLoading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
                 <TextView
                         android:visibility="gone"
                         android:gravity="center"
-                        android:id="@+id/tvErrorPictures"
+                        android:id="@+id/tvError"
                         android:text="@string/netword_error"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
 
             </FrameLayout>
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-        <com.google.android.gms.ads.AdView
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/adView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ads:adSize="SMART_BANNER"
-                ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
-        </com.google.android.gms.ads.AdView>
-    </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

@@ -1,11 +1,13 @@
 package com.kiemtien.hotlist.adapter
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kiemtien.hotlist.R
 import android.support.v7.widget.LinearLayoutManager
+import com.kiemtien.hotlist.activity.PictureDetailActivity
 import com.squareup.picasso.Picasso
 import com.kiemtien.hotlist.model.Picture
 import kotlinx.android.synthetic.main.row_picture.view.*
@@ -35,11 +37,19 @@ class PicturesAdapter(var layoutManager: LinearLayoutManager) :
 
     inner class PictureVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(picture : Picture) {
-            Picasso.with(itemView.context)
-                .load(picture.imageUrl.thumbnail)
-                .placeholder(R.drawable.loading_picture)
-                .error(R.drawable.loading_picture)
-                .into(itemView.imgAvatar)
+            if(picture.imageUrl != null && picture.imageUrl.medium != null && !picture.imageUrl.medium.equals("")) {
+                Picasso.with(itemView.context)
+                        .load(picture.imageUrl.medium)
+                        .placeholder(R.drawable.loading_picture)
+                        .error(R.drawable.loading_picture)
+                        .into(itemView.imgAvatar)
+
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, PictureDetailActivity::class.java)
+                    intent.putExtra("link", pictures[adapterPosition].imageUrl.large)
+                    itemView.context.startActivity(intent)
+                }
+            }
         }
     }
 }

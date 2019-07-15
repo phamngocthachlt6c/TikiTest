@@ -1,21 +1,20 @@
-package com.kiemtien.hotlist.activity
+package com.kiemtien.hotlist.fragment
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
 import android.view.View
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
+import android.view.ViewGroup
 import com.kiemtien.hotlist.R
-import com.kiemtien.hotlist.presenter.CategoriesPresenter
-import com.kiemtien.hotlist.view.CategoriesView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.kiemtien.hotlist.activity.PrivacyPolicyActivity
 import com.kiemtien.hotlist.adapter.CategoriesAdapter
 import com.kiemtien.hotlist.model.Category
+import com.kiemtien.hotlist.presenter.CategoriesPresenter
+import com.kiemtien.hotlist.view.CategoriesView
+import kotlinx.android.synthetic.main.fragment_categories.*
 
-
-class MainActivityTemp : AppCompatActivity(), CategoriesView {
+class CategoriesFragment : BaseFragment(), CategoriesView {
     private val STATUS_LOADING = 0
     private val STATUS_NOT_EMPTY = 1
     private val STATUS_EMPTY = 2
@@ -24,31 +23,30 @@ class MainActivityTemp : AppCompatActivity(), CategoriesView {
     private var categoriesPresenter: CategoriesPresenter? = null
     private var categoriesAdapter: CategoriesAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        supportActionBar?.title = "Menu"
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_categories, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         refreshView.setOnRefreshListener {
             fetchCategories()
         }
-        val linearLayoutManager = LinearLayoutManager(this@MainActivityTemp)
-        categoriesAdapter = CategoriesAdapter(linearLayoutManager)
+        val linearLayoutManager = LinearLayoutManager(context)
+        categoriesAdapter = CategoriesAdapter(linearLayoutManager, mOnDirection)
         with(rvCategories) {
             layoutManager = linearLayoutManager
             adapter = categoriesAdapter
         }
 
         layoutPrivacyPolicy.setOnClickListener{
-            val intent = Intent(this@MainActivityTemp, PrivacyPolicyActivity::class.java)
+            val intent = Intent(context, PrivacyPolicyActivity::class.java)
             startActivity(intent)
         }
 
         categoriesPresenter = CategoriesPresenter(this)
         fetchCategories()
-
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713")
-        val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
     }
 
     private fun fetchCategories() {
@@ -94,6 +92,14 @@ class MainActivityTemp : AppCompatActivity(), CategoriesView {
                 pgLoading.visibility = View.GONE
                 tvError.visibility = View.VISIBLE
             }
+        }
+    }
+
+    companion object {
+
+        fun newInstance(): CategoriesFragment {
+            val fragment = CategoriesFragment()
+            return fragment
         }
     }
 }

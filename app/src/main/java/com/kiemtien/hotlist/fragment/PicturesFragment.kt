@@ -1,7 +1,6 @@
 package com.kiemtien.hotlist.fragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,8 @@ import com.kiemtien.hotlist.model.Category
 import com.kiemtien.hotlist.model.Picture
 import com.kiemtien.hotlist.presenter.PicturesPresenter
 import com.kiemtien.hotlist.view.PicturesView
-import kotlinx.android.synthetic.main.activity_pictures.*
-import kotlinx.android.synthetic.main.activity_pictures.view.*
+import kotlinx.android.synthetic.main.fragment_pictures.*
+import kotlinx.android.synthetic.main.fragment_pictures.view.*
 
 class PicturesFragment : BaseFragment(), PicturesView {
     private val STATUS_LOADING = 0
@@ -26,7 +25,7 @@ class PicturesFragment : BaseFragment(), PicturesView {
     private var category: Category? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.activity_pictures, container)
+        return inflater.inflate(R.layout.fragment_pictures, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,7 +47,12 @@ class PicturesFragment : BaseFragment(), PicturesView {
 
     private fun fetchPictures() {
         setLayoutStatus(STATUS_LOADING)
-        picturesPresenter?.fetchPictures()
+        picturesPresenter?.fetchPictures(category?.id)
+    }
+
+    fun reload(category: Category) {
+        this.category = category
+        fetchPictures()
     }
 
     override fun onSuccess(pictures: MutableList<Picture>) {

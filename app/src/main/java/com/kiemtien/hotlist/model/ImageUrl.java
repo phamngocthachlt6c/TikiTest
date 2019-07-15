@@ -3,19 +3,29 @@ package com.kiemtien.hotlist.model;
 import com.google.gson.annotations.SerializedName;
 
 public class ImageUrl {
-    @SerializedName("thumbnail")
-    private String thumbnail;
-    @SerializedName("medium")
-    private String medium;
+    @SerializedName("origin")
+    private String origin;
     @SerializedName("large")
     private String large;
+    @SerializedName("medium")
+    private String medium;
+    @SerializedName("small")
+    private String small;
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getOrigin() {
+        return origin;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getLarge() {
+        return large;
+    }
+
+    public void setLarge(String large) {
+        this.large = large;
     }
 
     public String getMedium() {
@@ -26,11 +36,11 @@ public class ImageUrl {
         this.medium = medium;
     }
 
-    public String getLarge() {
-        return large;
+    public String getSmall() {
+        return small;
     }
 
-    public void setLarge(String large) {
-        this.large = large;
+    public void setSmall(String small) {
+        this.small = small;
     }
 }
