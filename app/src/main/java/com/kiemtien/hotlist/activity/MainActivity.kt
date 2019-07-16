@@ -131,11 +131,11 @@ class MainActivity : AppCompatActivity(), MainActivityCallback {
                 startActivity(intent)
                 true
             }
-            R.id.favoirte -> {
-                val intent = Intent(this, FavoritePictureActivity::class.java)
-                startActivity(intent)
-                true
-            }
+//            R.id.favoirte -> {
+//                val intent = Intent(this, FavoritePictureActivity::class.java)
+//                startActivity(intent)
+//                true
+//            }
             else -> super.onOptionsItemSelected(item)
         }
     }

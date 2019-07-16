@@ -29,6 +29,8 @@ class PictureDetailActivity() : AppCompatActivity() {
 
         picture = intent.getParcelableExtra("picture")
         if (picture != null && !picture?.imageUrl?.large.equals("")) {
+            tvPictureName.text = picture?.name
+
             Picasso.with(this)
                 .load(picture?.imageUrl?.large)
                 .placeholder(R.drawable.loading_picture)
