@@ -46,7 +46,7 @@ class PicturesAdapter(var layoutManager: LinearLayoutManager) :
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, PictureDetailActivity::class.java)
-                    intent.putExtra("link", pictures[adapterPosition].imageUrl.large)
+                    intent.putExtra("picture", pictures[adapterPosition])
                     itemView.context.startActivity(intent)
                 }
             }

@@ -1,14 +1,48 @@
 package com.kiemtien.hotlist.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
-public class Picture {
+public class Picture implements Parcelable {
     @SerializedName("id")
     private String id;
     @SerializedName("name")
     private String name;
     @SerializedName("image_url")
     private ImageUrl imageUrl;
+
+    public Picture(){}
+
+    protected Picture(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        imageUrl = in.readParcelable(ImageUrl.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeParcelable(imageUrl, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Picture> CREATOR = new Creator<Picture>() {
+        @Override
+        public Picture createFromParcel(Parcel in) {
+            return new Picture(in);
+        }
+
+        @Override
+        public Picture[] newArray(int size) {
+            return new Picture[size];
+        }
+    };
 
     public String getId() {
         return id;

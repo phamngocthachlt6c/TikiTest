@@ -1,5 +1,6 @@
 package com.kiemtien.hotlist.activity
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -19,7 +20,7 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import com.kiemtien.hotlist.config.AppConfig
 import com.kiemtien.hotlist.presenter.AppPresenter
 import com.kiemtien.hotlist.util.AdsDecider
-
+import android.view.Menu
 
 class MainActivity : AppCompatActivity(), MainActivityCallback {
 
@@ -57,9 +58,17 @@ class MainActivity : AppCompatActivity(), MainActivityCallback {
         adsDecider = AdsDecider()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.app_menu, menu)
+        return true
+    }
+
     private fun loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd(getString(R.string.reward_id),
-                AdRequest.Builder().build())
+        mRewardedVideoAd.loadAd(
+            getString(R.string.reward_id),
+            AdRequest.Builder().build()
+        )
     }
 
     override fun onGotoCategories() {
@@ -115,6 +124,16 @@ class MainActivity : AppCompatActivity(), MainActivityCallback {
         return when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
+                true
+            }
+            R.id.info -> {
+                val intent = Intent(this, PrivacyPolicyActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.favoirte -> {
+                val intent = Intent(this, FavoritePictureActivity::class.java)
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)

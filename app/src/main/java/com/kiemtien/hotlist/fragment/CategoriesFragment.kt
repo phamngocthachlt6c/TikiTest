@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.kiemtien.hotlist.R
 import com.kiemtien.hotlist.activity.PrivacyPolicyActivity
 import com.kiemtien.hotlist.adapter.CategoriesAdapter
+import com.kiemtien.hotlist.config.AppConfig
 import com.kiemtien.hotlist.model.Category
 import com.kiemtien.hotlist.presenter.CategoriesPresenter
 import com.kiemtien.hotlist.view.CategoriesView
@@ -40,9 +41,16 @@ class CategoriesFragment : BaseFragment(), CategoriesView {
             adapter = categoriesAdapter
         }
 
-        layoutPrivacyPolicy.setOnClickListener{
+        layoutPrivacyPolicy.visibility =
+            if (AppConfig.getInstance().isPrivacyPolicyShortcutLink) View.VISIBLE else View.GONE
+        layoutPrivacyPolicy.setOnClickListener {
             val intent = Intent(context, PrivacyPolicyActivity::class.java)
             startActivity(intent)
+        }
+
+        btClosePrivacyPolicy.setOnClickListener {
+            layoutPrivacyPolicy.visibility = View.GONE
+            AppConfig.getInstance().isPrivacyPolicyShortcutLink = false
         }
 
         categoriesPresenter = CategoriesPresenter(this)

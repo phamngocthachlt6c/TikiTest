@@ -12,14 +12,21 @@
             android:id="@+id/layoutPrivacyPolicy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="horizontal">
         <TextView
                 android:text="@string/text_privacy_title"
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blue"
+                android:gravity="center"
                 android:padding="5dp"/>
+
+        <ImageView
+                android:id="@+id/btClosePrivacyPolicy"
+                android:src="@drawable/ic_close_black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
