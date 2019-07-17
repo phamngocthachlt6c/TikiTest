@@ -10,4 +10,9 @@
           <!--android:icon="@drawable/ic_favorite_white"-->
           <!--android:title="Privacy Policy"-->
           <!--app:showAsAction="ifRoom"/>-->
+
+    <item android:id="@+id/rateApp"
+          android:icon="@drawable/ic_star_white"
+          android:title="Rate Hot List"
+          app:showAsAction="ifRoom"/>
 </menu>
