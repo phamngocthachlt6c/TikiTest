@@ -1,14 +1,20 @@
 <resources>
-    <string name="app_name">Hot List</string>
+    <string name="app_name">Beauty List</string>
     <string name="keyword_empty">Empty list!</string>
     <string name="netword_error">Network error!</string>
 
 
-    <!-- ADS -->
-    <string name="ads_application_id">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="banner_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="interstitial_id">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="reward_id">ca-app-pub-3940256099942544/5224354917</string>
+    <!-- ADS SAMPLE-->
+    <!--<string name="ads_application_id">ca-app-pub-3940256099942544~3347511713</string>-->
+    <!--<string name="banner_id">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="interstitial_id">ca-app-pub-3940256099942544/1033173712</string>-->
+    <!--<string name="reward_id">ca-app-pub-3940256099942544/5224354917</string>-->
+
+    <!-- ADS REAL-->
+    <string name="ads_application_id">ca-app-pub-1745214908046998~5366612874</string>
+    <string name="banner_id">ca-app-pub-1745214908046998/1151147646</string>
+    <string name="interstitial_id">ca-app-pub-1745214908046998/1323426087</string>
+    <string name="reward_id">ca-app-pub-1745214908046998/2414405657</string>
 
 
     <string name="text_privacy_title">

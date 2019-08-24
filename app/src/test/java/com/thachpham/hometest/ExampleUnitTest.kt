@@ -1,4 +1,4 @@
-package com.kiemtien.hotlist
+package com.kiemtien.beautylist
 
 import org.junit.Test
 

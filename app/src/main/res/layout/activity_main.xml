@@ -4,15 +4,15 @@
         xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.kiemtien.hotlist.activity.MainActivity">
+        tools:context="com.kiemtien.beautylist.activity.MainActivity">
 
-    <com.kiemtien.hotlist.custom.NoneSwipableViewPager
+    <com.kiemtien.beautylist.custom.NoneSwipableViewPager
             android:id="@+id/mainViewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-    </com.kiemtien.hotlist.custom.NoneSwipableViewPager>
+    </com.kiemtien.beautylist.custom.NoneSwipableViewPager>
 
     <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"

@@ -1,4 +1,4 @@
-package com.kiemtien.hotlist
+package com.kiemtien.beautylist
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

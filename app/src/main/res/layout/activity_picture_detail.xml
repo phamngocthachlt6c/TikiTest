@@ -1,46 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context="com.kiemtien.beautylist.activity.MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcvListImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.kiemtien.hotlist.activity.MainActivity">
+        android:layout_height="match_parent" />
 
     <ImageView
-            android:id="@+id/imgPicture"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    <ImageView
-            android:padding="5dp"
-            android:id="@+id/btClose"
-            android:src="@drawable/ic_close_black"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/btClose"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@drawable/ic_close_black"
+        android:visibility="gone" />
 
     <TextView
-            android:id="@+id/tvPictureName"
-            android:textColor="@color/black"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"/>
+        android:id="@+id/tvPictureName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:visibility="gone" />
 
     <LinearLayout
-            android:gravity="center"
-            android:padding="10dp"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:id="@+id/layoutControl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/black_alpha_20percents"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="2dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="2dp"
+        android:weightSum="4">
+
         <ImageView
-                android:visibility="gone"
-                android:id="@+id/btFavorite"
-                android:src="@drawable/ic_favorite_border_pink"
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
+            android:id="@+id/btBack"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_arrow_back"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/btPlayAllList"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_favorite_border_pink"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/btFavorite"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_favorite_border_pink"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/btDownload"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_favorite_border_pink"
+            android:visibility="visible" />
     </LinearLayout>
 
 </FrameLayout>
