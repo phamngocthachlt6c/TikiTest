@@ -3,8 +3,9 @@
     <string name="keyword_empty">Empty list!</string>
     <string name="netword_error">Network error!</string>
 
+    <string name="facebook_app_id">363266344581002</string>
 
-    <!-- ADS SAMPLE-->
+     <!--ADS SAMPLE-->
     <!--<string name="ads_application_id">ca-app-pub-3940256099942544~3347511713</string>-->
     <!--<string name="banner_id">ca-app-pub-3940256099942544/6300978111</string>-->
     <!--<string name="interstitial_id">ca-app-pub-3940256099942544/1033173712</string>-->

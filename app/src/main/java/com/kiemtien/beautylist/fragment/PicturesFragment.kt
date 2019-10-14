@@ -31,7 +31,7 @@ class PicturesFragment : BaseFragment(), PicturesView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.refreshViewPictures.setOnRefreshListener {
+        view.refreshViewPictures?.setOnRefreshListener {
             fetchPictures()
         }
         val linearLayoutManager = GridLayoutManager(context, 2)
@@ -57,7 +57,7 @@ class PicturesFragment : BaseFragment(), PicturesView {
 
     override fun onSuccess(pictures: MutableList<Picture>) {
         picturesAdapter?.setData(pictures)
-        refreshViewPictures.isRefreshing = false
+        refreshViewPictures?.isRefreshing = false
         if (pictures.size > 0) {
             setLayoutStatus(STATUS_NOT_EMPTY)
         } else {
@@ -66,7 +66,7 @@ class PicturesFragment : BaseFragment(), PicturesView {
     }
 
     override fun onError() {
-        refreshViewPictures.isRefreshing = false
+        refreshViewPictures?.isRefreshing = false
         setLayoutStatus(STATUS_ERROR)
     }
 

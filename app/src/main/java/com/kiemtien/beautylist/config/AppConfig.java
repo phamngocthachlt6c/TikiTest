@@ -10,10 +10,12 @@ public class AppConfig {
     private final String PREF_MAX_NUMBER_DELAY_AD = "max_number_delay_ad";
     private final String PREF_MAX_TIME_DELAY_AD = "max_time_delay_ad";
     private final String SHOW_LINK_PRIVACY_POLICY = "show_privacy_policy_link";
+    private final String SHOULD_SHOW_RATING_DIALOG = "SHOULD_SHOW_RATING_DIALOG";
 
     private int maxNumberDelayAd;
     private long maxTimeDelayAd;
     private boolean isPrivacyPolicyShortcutLink;
+    private boolean shouldShowRatingDialog;
 
     private AppConfig() {
     }
@@ -38,6 +40,7 @@ public class AppConfig {
         maxNumberDelayAd = mSharedPreference.getInt(PREF_MAX_NUMBER_DELAY_AD, 5);
         maxTimeDelayAd = mSharedPreference.getLong(PREF_MAX_TIME_DELAY_AD, 5 * 60 * 1000); //5 minutes
         isPrivacyPolicyShortcutLink = mSharedPreference.getBoolean(SHOW_LINK_PRIVACY_POLICY, true);
+        shouldShowRatingDialog = mSharedPreference.getBoolean(SHOULD_SHOW_RATING_DIALOG, true);
     }
 
     public void setMaxNumberDelayAd(int max) {
@@ -65,5 +68,14 @@ public class AppConfig {
     public void setPrivacyPolicyShortcutLink(boolean privacyPolicyShortcutLink) {
         isPrivacyPolicyShortcutLink = privacyPolicyShortcutLink;
         mSharedPreference.edit().putBoolean(SHOW_LINK_PRIVACY_POLICY, privacyPolicyShortcutLink).apply();
+    }
+
+    public void setShouldShowRatingDialog(boolean shouldShowRatingDialog) {
+        this.shouldShowRatingDialog = shouldShowRatingDialog;
+        mSharedPreference.edit().putBoolean(SHOULD_SHOW_RATING_DIALOG, shouldShowRatingDialog).apply();
+    }
+
+    public boolean isShouldShowRatingDialog() {
+        return shouldShowRatingDialog;
     }
 }

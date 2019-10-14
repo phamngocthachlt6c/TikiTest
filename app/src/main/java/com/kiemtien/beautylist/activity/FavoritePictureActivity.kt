@@ -1,45 +1,46 @@
 package com.kiemtien.beautylist.activity
 
+import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.room.Room
-import com.kiemtien.beautylist.model.FavoritePicture
-import com.kiemtien.beautylist.room.AppDatabase
-import com.kiemtien.beautylist.room.FavoritePictureDao
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableCompletableObserver
-import io.reactivex.schedulers.Schedulers
 import android.os.AsyncTask
-import android.util.Log
-import com.kiemtien.beautylist.MyApplication
+import android.os.Environment
 import com.kiemtien.beautylist.R
+import java.io.File
+import java.io.FilenameFilter
+import android.graphics.BitmapFactory
+import android.support.v7.widget.GridLayoutManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.kiemtien.beautylist.adapter.PicturesAdapter
+import com.kiemtien.beautylist.model.Picture
+import kotlinx.android.synthetic.main.activity_favorite.*
 
-
-class FavoritePictureActivity() : AppCompatActivity() {
+class FavoritePictureActivity : AppCompatActivity() {
+    private lateinit var picturesAdapter: PicturesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_picture_detail)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_favorite)
         supportActionBar?.title = "Favorite"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        loadData()
+        val linearLayoutManager = GridLayoutManager(this, 2)
+        picturesAdapter = PicturesAdapter(linearLayoutManager)
+        with(rvPictures) {
+            layoutManager = linearLayoutManager
+            adapter = picturesAdapter
+        }
+        loadFiles()
+
+        MobileAds.initialize(this, getString(R.string.ads_application_id))
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
     }
 
-    private fun loadData() {
-        DownloadFilesTask().execute()
-    }
-
-    private inner class DownloadFilesTask : AsyncTask<Void, Int, MutableList<FavoritePicture>>() {
-        override fun doInBackground(vararg p0: Void?): MutableList<FavoritePicture> {
-            return MyApplication.instance?.appDatabase?.favoritePictureDao()!!.allFavorites
-        }
-
-        override fun onPostExecute(result: MutableList<FavoritePicture>?) {
-            Log.d("aaa", result?.get(0)?.name)
-        }
+    private fun loadFiles() {
+        LoadFilesTask().execute()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -52,6 +53,54 @@ class FavoritePictureActivity() : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun loadData(): MutableList<String> {
+        val root = File(Environment.getExternalStorageDirectory().absolutePath + "/HotList/Favorite")
+
+        val imageFilter = object : FilenameFilter {
+            var f: File? = null
+            override fun accept(dir: File, name: String): Boolean {
+                if (name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png")) {
+                    return true
+                }
+                f = File(dir.absolutePath + "/" + name)
+
+                return false
+            }
+        }
+        var mutableList: MutableList<String> = ArrayList()
+        try {
+            mutableList = root.list(imageFilter).toMutableList()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return mutableList
+    }
+
+    private inner class LoadFilesTask : AsyncTask<Void, Int, MutableList<Bitmap>>() {
+        override fun doInBackground(vararg p0: Void?): MutableList<Bitmap> {
+            val listPath = loadData()
+            val listBitmap = ArrayList<Bitmap>()
+            for (fileName in listPath) {
+                val options = BitmapFactory.Options()
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888
+                val bitmap = BitmapFactory.decodeFile(
+                        Environment.getExternalStorageDirectory().absolutePath + "/HotList/Favorite/" + fileName, options)
+                listBitmap.add(bitmap)
+            }
+            return listBitmap
+        }
+
+        override fun onPostExecute(result: MutableList<Bitmap>?) {
+            val pictures = ArrayList<Picture>()
+            for (bitmap in result!!.iterator()) {
+                val picture = Picture()
+                picture.imageBitmap = bitmap
+                pictures.add(picture)
+            }
+            picturesAdapter.setData(pictures)
         }
     }
 }

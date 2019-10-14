@@ -31,4 +31,20 @@ class AppPresenter {
                     }
                 })
     }
+
+    fun trackingOpenApp(country: String, deviceName: String) {
+        MyApplication.instance?.apiInterface?.trackingOpenApp(country, deviceName)
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(object : DisposableObserver<String>() {
+                    override fun onNext(value: String) {
+                    }
+
+                    override fun onComplete() {
+                    }
+
+                    override fun onError(e: Throwable?) {
+                    }
+                })
+    }
 }

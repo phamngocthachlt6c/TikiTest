@@ -9,6 +9,7 @@ import com.kiemtien.beautylist.model.Picture;
 import io.reactivex.Observable;
 import retrofit2.Response;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 import java.util.List;
@@ -16,8 +17,13 @@ import java.util.List;
 public interface ApiInterface {
     @GET(Constant.API_GET_CATEGORIES)
     Observable<Response<DataResponse<List<Category>>>> fetCategories();
+
     @GET(Constant.API_GET_PICTURES)
     Observable<Response<DataResponse<List<Picture>>>> fetPictures(@Query("category_id") String categoryId);
+
     @GET(Constant.API_GET_COMMON_CONFIG)
     Observable<Response<DataResponse<CommonConfig>>> fetCommonConfig();
+
+    @POST(Constant.API_TRACKING_OPEN_APP)
+    Observable<String> trackingOpenApp(@Query("country") String country, @Query("device_name") String deviceName);
 }

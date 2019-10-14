@@ -46,11 +46,20 @@ class DetailPicturesAdapter(var layoutManager: LinearLayoutManager) :
                         .placeholder(R.drawable.loading_picture2)
                         .error(R.drawable.loading_picture2)
                         .into(itemView.imgPicture)
+            } else {
+                itemView.imgPicture.setImageBitmap(picture.imageBitmap)
             }
             itemView.setOnClickListener {
                 mOnItemClick?.onClick()
             }
         }
+    }
+
+    fun getPicture(position: Int): Picture? {
+        if (position >= pictures.size) {
+            return null
+        }
+        return pictures[position]
     }
 
     interface OnItemClick {

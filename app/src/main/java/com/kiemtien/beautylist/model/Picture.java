@@ -1,5 +1,6 @@
 package com.kiemtien.beautylist.model;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
@@ -12,12 +13,15 @@ public class Picture implements Parcelable {
     @SerializedName("image_url")
     private ImageUrl imageUrl;
 
+    private Bitmap imageBitmap;
+
     public Picture(){}
 
     protected Picture(Parcel in) {
         id = in.readString();
         name = in.readString();
         imageUrl = in.readParcelable(ImageUrl.class.getClassLoader());
+        imageBitmap = in.readParcelable(Bitmap.class.getClassLoader());
     }
 
     @Override
@@ -25,6 +29,7 @@ public class Picture implements Parcelable {
         dest.writeString(id);
         dest.writeString(name);
         dest.writeParcelable(imageUrl, flags);
+        dest.writeParcelable(imageBitmap, flags);
     }
 
     @Override
@@ -67,4 +72,13 @@ public class Picture implements Parcelable {
     public void setImageUrl(ImageUrl imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public Bitmap getImageBitmap() {
+        return imageBitmap;
+    }
+
+    public void setImageBitmap(Bitmap imageBitmap) {
+        this.imageBitmap = imageBitmap;
+    }
+
 }

@@ -22,22 +22,31 @@ import com.kiemtien.beautylist.presenter.AppPresenter
 import com.kiemtien.beautylist.util.AdsDecider
 import android.view.Menu
 import android.content.ActivityNotFoundException
+import android.graphics.Color
 import android.net.Uri
+import android.support.v7.app.AlertDialog
+import android.view.Gravity
+import kotlinx.android.synthetic.main.layout_drawer_menu.*
 
 
 class MainActivity : AppCompatActivity(), MainActivityCallback {
 
+    private lateinit var appPresenter: AppPresenter
     private var mainViewPagerAdapter: MainViewPagerAdapter? = null
     private var mInterstitialAd: InterstitialAd? = null
     private lateinit var mRewardedVideoAd: RewardedVideoAd
 
     private var adsDecider: AdsDecider? = null
 
+    private var ratingDialogAlreadyShowed = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Init Config
         AppConfig.getInstance(this)
-        AppPresenter().fetchConfig()
+        appPresenter = AppPresenter()
+        sendTracking()
+        appPresenter.fetchConfig()
 
         setContentView(R.layout.activity_main)
         supportActionBar?.title = "Menu"
@@ -59,6 +68,8 @@ class MainActivity : AppCompatActivity(), MainActivityCallback {
         loadRewardedVideoAd()
 
         adsDecider = AdsDecider()
+
+        initUI()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -69,8 +80,8 @@ class MainActivity : AppCompatActivity(), MainActivityCallback {
 
     private fun loadRewardedVideoAd() {
         mRewardedVideoAd.loadAd(
-            getString(R.string.reward_id),
-            AdRequest.Builder().build()
+                getString(R.string.reward_id),
+                AdRequest.Builder().build()
         )
     }
 
@@ -110,6 +121,15 @@ class MainActivity : AppCompatActivity(), MainActivityCallback {
     }
 
     override fun onBackPressed() {
+        if (!ratingDialogAlreadyShowed && AppConfig.getInstance().isShouldShowRatingDialog) {
+            ratingDialogAlreadyShowed = true
+            displayRateAppDialog()
+            return
+        }
+        if (drawerMain.isDrawerOpen(Gravity.END)) {
+            drawerMain.closeDrawers()
+            return
+        }
         when (mainViewPager.currentItem) {
             0 -> {
                 finish()
@@ -130,8 +150,7 @@ class MainActivity : AppCompatActivity(), MainActivityCallback {
                 true
             }
             R.id.info -> {
-                val intent = Intent(this, PrivacyPolicyActivity::class.java)
-                startActivity(intent)
+                openPrivacyPolicyScreen()
                 true
             }
 //            R.id.favoirte -> {
@@ -141,6 +160,14 @@ class MainActivity : AppCompatActivity(), MainActivityCallback {
 //            }
             R.id.rateApp -> {
                 openRating()
+                true
+            }
+            R.id.hamburger -> {
+                if (drawerMain.isDrawerOpen(Gravity.END)) {
+                    drawerMain.closeDrawers()
+                } else {
+                    drawerMain.openDrawer(Gravity.END)
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -211,20 +238,63 @@ class MainActivity : AppCompatActivity(), MainActivityCallback {
         // To count with Play market backstack, After pressing back button,
         // to taken back to our application, we need to add following flags to intent.
         goToMarket.addFlags(
-            Intent.FLAG_ACTIVITY_NO_HISTORY or
-                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
-                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                Intent.FLAG_ACTIVITY_NO_HISTORY or
+                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
         )
         try {
             startActivity(goToMarket)
         } catch (e: ActivityNotFoundException) {
             startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)
-                )
+                    Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)
+                    )
             )
         }
+    }
 
+    private fun initUI() {
+        imgDrawerMenuFavorite.setColorFilter(Color.BLACK)
+        imgDrawerMenuPrivacy.setColorFilter(Color.BLACK)
+        imgDrawerMenuRateApp.setColorFilter(Color.BLACK)
+        layoutDrawerFavorite.setOnClickListener {
+            val screenFavorite = Intent(this, FavoritePictureActivity::class.java)
+            startActivity(screenFavorite)
+        }
+        layoutDrawerPrivacy.setOnClickListener {
+            openPrivacyPolicyScreen()
+        }
+        layoutDrawerRateApp.setOnClickListener {
+            openRating()
+        }
+    }
+
+    private fun openPrivacyPolicyScreen() {
+        val intent = Intent(this, PrivacyPolicyActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun displayRateAppDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Rate this application")
+        builder.setCancelable(true)
+        builder.setPositiveButton("Ok") { dialog, which ->
+            dialog.dismiss()
+            openRating()
+            AppConfig.getInstance().isShouldShowRatingDialog = false
+        }
+        builder.setNegativeButton("Cancel", null)
+        builder.show()
+    }
+
+    private fun sendTracking() {
+        try {
+            val local = resources.configuration.locale.country
+            val device = android.os.Build.MODEL
+            appPresenter.trackingOpenApp(local, device)
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+        }
     }
 }
